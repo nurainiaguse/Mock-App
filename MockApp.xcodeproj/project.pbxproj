@@ -12,6 +12,9 @@
 		53000DAC1CB1AEEC00771C9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53000DAA1CB1AEEC00771C9F /* Main.storyboard */; };
 		53000DAE1CB1AEED00771C9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53000DAD1CB1AEED00771C9F /* Assets.xcassets */; };
 		53000DB11CB1AEED00771C9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53000DAF1CB1AEED00771C9F /* LaunchScreen.storyboard */; };
+		53000DB91CB1B78200771C9F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53000DB81CB1B78200771C9F /* LocationManager.swift */; };
+		53000DBB1CB1BD6200771C9F /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53000DBA1CB1BD6200771C9F /* TimeInterval.swift */; };
+		53000DBD1CB1CE7700771C9F /* IntervalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53000DBC1CB1CE7700771C9F /* IntervalCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		53000DAD1CB1AEED00771C9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		53000DB01CB1AEED00771C9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		53000DB21CB1AEED00771C9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		53000DB81CB1B78200771C9F /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		53000DBA1CB1BD6200771C9F /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		53000DBC1CB1CE7700771C9F /* IntervalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntervalCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,9 @@
 				53000DAD1CB1AEED00771C9F /* Assets.xcassets */,
 				53000DAF1CB1AEED00771C9F /* LaunchScreen.storyboard */,
 				53000DB21CB1AEED00771C9F /* Info.plist */,
+				53000DB81CB1B78200771C9F /* LocationManager.swift */,
+				53000DBA1CB1BD6200771C9F /* TimeInterval.swift */,
+				53000DBC1CB1CE7700771C9F /* IntervalCell.swift */,
 			);
 			path = MockApp;
 			sourceTree = "<group>";
@@ -135,8 +144,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53000DBD1CB1CE7700771C9F /* IntervalCell.swift in Sources */,
 				53000DA91CB1AEEC00771C9F /* ViewController.swift in Sources */,
+				53000DBB1CB1BD6200771C9F /* TimeInterval.swift in Sources */,
 				53000DA71CB1AEEC00771C9F /* AppDelegate.swift in Sources */,
+				53000DB91CB1B78200771C9F /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
