@@ -32,6 +32,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     var timeInterval = TimeInterval()
     var currHeading: Double = 0.0
     var generalDirection: Double = 0.0
+    var date = NSDate()
     var beginTime: Int = 0
     var endTime: Int = 0
     
@@ -80,17 +81,31 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     
     /* Have to find swift function that can call this function after a period of time */
     func afterTimeInterval() {
+        timeInterval.pedometer.startPedometerUpdatesFromDate(date){
+            (data: CMPedometerData?, error) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
+                () -> Void in
+                if error == nil {
+                    if let steps = data?.numberOfSteps as? Int{
+                        self.timeInterval.steps = steps
+                    }
+                }
+            })
+        }
+        timeInterval.mostDirectionWithinInterval()
         timeIntervalArray.append(timeInterval) // add the current TimeInterval object to the array
         timeInterval = TimeInterval() // reset the TimeInterval object. is there a better way to do this?
         intervalTableView.reloadData()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return timeIntervalArray.count
+        return timeIntervalArray.count  // need to do error checking
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        let currTimeInterval = timeIntervalArray[indexPath.row]
         let cell = intervalTableView.dequeueReusableCellWithIdentifier("intervalCell", forIndexPath: indexPath) as! IntervalCell
+        cell.timeInterval = currTimeInterval
         return cell
     }
     
@@ -124,9 +139,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     }
     
     /* function to check whether currHeading is within param range*/
-    func withinRange(range: Double) -> Bool {
-        let lowrange = (currHeading - RANGE) % 360
-        let highrange = (currHeading + RANGE) % 360
+    func withinRange(direction: Double) -> Bool {
+        let lowrange = (direction - RANGE) % 360
+        let highrange = (direction + RANGE) % 360
         if currHeading > lowrange && currHeading <= highrange {
             return true
         }
@@ -136,10 +151,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     
     /* Returns the current minute */
     func getTime() -> Int{
-        let date = NSDate()
+        self.date = NSDate()
         let calendar = NSCalendar.currentCalendar()
-        let minute = calendar.component(NSCalendarUnit.Minute, fromDate: date)
-        return minute
+        let second = calendar.component(NSCalendarUnit.Minute, fromDate: self.date)
+        return second
     }
 
     override func didReceiveMemoryWarning() {

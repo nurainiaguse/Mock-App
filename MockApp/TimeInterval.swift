@@ -8,21 +8,22 @@
 
 import UIKit
 import CoreLocation
+import CoreMotion
 
 class TimeInterval: NSObject {
     
-    var endTime: NSDate
-    var startTime:NSDate
-    var heading: NSMutableDictionary
+   // var endTime: NSDate
+    //var startTime:NSDate
+    
+    // key is the direction; value is the corresponding time in seconds that the device is pointing to direction
+    var heading: [Double:Int]
+    var maxDirection: Double?
     var steps: Int = 0
+    let pedometer = CMPedometer()
     override init(){
-        endTime = NSDate()
-        startTime = NSDate()
-        heading = NSMutableDictionary()
-        
-        /* heading dictionary stores the number of minutes/seconds that
-        * the device is pointing to each location below:
-        */
+      //  endTime = NSDate()
+      //  startTime = NSDate()
+        heading = [Double:Int]()
         heading[0.0] = 0
         heading[90.0] = 0
         heading[180.0] = 0
@@ -33,9 +34,21 @@ class TimeInterval: NSObject {
         heading[315.0] = 0
     }
     
+    /* Finds the direction in which the device points at the longest
+    * for a given duration
+    */
     func mostDirectionWithinInterval() -> Double {
-        let values = heading.allValues
+        var maxDirection = 0.0
+        var maxDuration = 0
+        for (direction, duration) in heading {
+            if duration > maxDuration {
+                maxDuration = duration
+                maxDirection = direction
+            }
         
+        }
+        self.maxDirection = maxDirection
+        return maxDirection
     }
 
 }
