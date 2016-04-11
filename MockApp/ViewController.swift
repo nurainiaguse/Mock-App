@@ -56,11 +56,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(100), target: self, selector: "afterTimeInterval", userInfo: nil, repeats: true)
         
         // start updating the heading
-        locationManager.startUpdatingHeading()
-        currHeading = (locationManager.heading?.magneticHeading)! // get the current heading
-        generalDirection = checkGeneralDirection() // get the general direction of where the device is pointing at
-        beginTime = getTime()
-        intervalTableView.reloadData()
+        
     }
   
     
@@ -84,7 +80,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == .AuthorizedAlways {
             // authorized location status when app is in use; update current location
-            locationManager.startUpdatingLocation()
+            //locationManager.startUpdatingLocation()
+            locationManager.startUpdatingHeading()
+            currHeading = (locationManager.heading?.magneticHeading)! // get the current heading
+            generalDirection = checkGeneralDirection() // get the general direction of where the device is pointing at
+            beginTime = getTime()
+            intervalTableView.reloadData()
             // implement additional logic if needed...
         }
         // implement logic for other status values if needed...
