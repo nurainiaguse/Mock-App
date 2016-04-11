@@ -52,6 +52,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
            locationManager.requestAlwaysAuthorization()
         }
         
+        // call the afterTimeInterval() function after a set amount of time
+        NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(100), target: self, selector: "afterTimeInterval", userInfo: nil, repeats: true)
+        
         // start updating the heading
         locationManager.startUpdatingHeading()
         currHeading = (locationManager.heading?.magneticHeading)! // get the current heading
@@ -78,8 +81,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         beginTime = endTime
     }
     
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == .AuthorizedAlways {
+            // authorized location status when app is in use; update current location
+            locationManager.startUpdatingLocation()
+            // implement additional logic if needed...
+        }
+        // implement logic for other status values if needed...
+    }
     
-    /* Have to find swift function that can call this function after a period of time */
+    /* This function is called by NSTimer.scheduledTimerWithTimeInterval */
     func afterTimeInterval() {
         timeInterval.pedometer.startPedometerUpdatesFromDate(date){
             (data: CMPedometerData?, error) -> Void in
